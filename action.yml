@@ -1,0 +1,22 @@
+name: "golines annotations"
+description: "run golines formatting checks and annotate problem files"
+runs:
+  using: "composite"
+  steps:
+    - name: Check formatting
+      shell: bash
+      run: |
+        cd
+        go get -u golang.org/x/tools/cmd/goimports
+        go get -u github.com/segmentio/golines
+        cd -
+
+        STATUS=0
+        for f in `find . -type f -name '*.go' -not -path './.git*'`; do
+          MATCHED=`~/go/bin/golines -m 80 --base-formatter ~/go/bin/goimports -l "$f"`
+          if [ ! -z "$MATCHED" ]; then
+            STATUS=1
+            echo -e "::error file=$f::Unformatted file. Set up formatting on save with \`~/go/bin/golines -m 80 --base-formatter ~/go/bin/goimports\` in your IDE!";
+          fi;
+        done
+        exit $STATUS
