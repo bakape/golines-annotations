@@ -16,7 +16,7 @@ runs:
           MATCHED=`~/go/bin/golines -m 80 --base-formatter ~/go/bin/goimports -l "$f"`
           if [ ! -z "$MATCHED" ]; then
             STATUS=1
-            echo -e "::error file=$f::Unformatted file. Set up formatting on save with \`~/go/bin/golines -m 80 --base-formatter ~/go/bin/goimports\` in your IDE!";
+            echo -e "::error file=$f::Unformatted file: \"$f\". Set up formatting on save with \`~/go/bin/golines -m 80 --base-formatter ~/go/bin/goimports\` in your IDE!";
           fi;
         done
         exit $STATUS
