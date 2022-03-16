@@ -6,10 +6,8 @@ runs:
     - name: Check formatting
       shell: bash
       run: |
-        cd
         go install golang.org/x/tools/cmd/goimports@latest
         go install github.com/segmentio/golines@latest
-        cd -
 
         STATUS=0
         for f in `find . -type f -name '*.go' -not -path './.git*'`; do
