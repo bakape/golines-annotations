@@ -7,8 +7,8 @@ runs:
       shell: bash
       run: |
         cd
-        go get -u golang.org/x/tools/cmd/goimports
-        go get -u github.com/segmentio/golines
+        go install golang.org/x/tools/cmd/goimports@latest
+        go install github.com/segmentio/golines@latest
         cd -
 
         STATUS=0
